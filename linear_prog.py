@@ -69,15 +69,22 @@ def board_to_string(board):
     return acc
 
 def gen_rand_board(width, height):
-    acc = []
-    for h in range(height):
-        row = [random.randint(0,2) for i in range(width)]
+    acc = [[0 for i in range(width)]]
+    for h in range(height - 1):
+
+        row = [0]
+        row.extend([random.randint(0,1) for i in range(width - 2)])
+        row.extend([0])
+
         acc.append(row)
+    acc.append([0 for i in range(width)])
     return acc
         
-def get_solution(width, height):
+def get_solution(board):
     
-    board = gen_rand_board(width, height)
+    width = len(board[0])
+    height = len(board)
+
     rows = [str(i) for i in range(width)]
     cols = [str(i) for i in range(height)]
 
@@ -129,10 +136,17 @@ def get_solution(width, height):
         return None
     
 if __name__ == "__main__":
-    w = 5
-    h = 6
-    sol = get_solution(w, h)
+    w = 10   
+    h = 10
+    # board = [[0, 1, 0],
+    #          [0, 1, 0],
+    #          [0, 1, 0]]
+    board = gen_rand_board(w,h)
+
+    sol = get_solution(board)
     if sol:
+        print(board_to_string(board))
         print(solution_to_string(sol, w, h))
     else:
+        print(board_to_string(board))
         print("No solution found")
