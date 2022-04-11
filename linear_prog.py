@@ -53,6 +53,7 @@ def solution_to_string(choices, width, height):
     rows = [str(i) for i in range(width)]
     cols = [str(i) for i in range(height)]
     acc = ""
+
     for c in cols:
         acc += "\n"
         for r in rows:
@@ -70,7 +71,7 @@ def board_to_string(board):
 
 def gen_rand_board(width, height):
     acc = [[0 for i in range(width)]]
-    for h in range(height - 1):
+    for h in range(height - 2):
 
         row = [0]
         row.extend([random.randint(0,1) for i in range(width - 2)])
@@ -136,12 +137,20 @@ def get_solution(board):
         return None
     
 if __name__ == "__main__":
-    w = 10   
-    h = 10
-    # board = [[0, 1, 0],
+    
+    # board = [[0, 0, 0],
     #          [0, 1, 0],
-    #          [0, 1, 0]]
-    board = gen_rand_board(w,h)
+    #          [0, 0, 0]]
+    board = False
+
+    if board:
+        w = len(board[0])
+        h = len(board)
+    else:
+        w = 10   
+        h = 10
+
+        board = gen_rand_board(w,h)
 
     sol = get_solution(board)
     if sol:
